@@ -6,4 +6,4 @@ C - Para cada ponto de saída calculamos a quantidade de produtos que vem de cim
 
 D - 
 
-G - Temos que colocar os medalhões na profundidade de seu valor, então o medalhão de valor i irá cobrir 1/2^i da árvore precisamos verificar se as somas dos medalhões é menor ou igual a 1. Sabemos que mudar um medalhão de valor i > 2*10^5 não vai mudar o valor final, exceto se a soma for igual a 1. 
+G - Temos que colocar os medalhões na profundidade de seu valor, então o medalhão de valor i irá cobrir 1/2^i da árvore precisamos verificar se as somas dos medalhões é menor ou igual a 1. Guardamos um vetor de 0,1 que diz que na i-esima posição a quantidade da árvore de 1/2^i que foi utilizada e sempre que virá 2 em uma posição somamos na posição i-1-ésima posição e zeramos a i-ésima posição.  Sabemos que mudar um medalhão de valor i > 2*10^5 não vai mudar o valor final, exceto se a soma for igual a 1 + eps. Podemos simular essas operações com uma estrutura de dados como BIT.
