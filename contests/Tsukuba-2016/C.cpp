@@ -1,86 +1,42 @@
+//If you are trying to hack me I wish you can get it, Good Luck :D
 #include <bits/stdc++.h>
 using namespace std;
 
-#define debug(args...) // fprintf (stderr, args)
+#define debug(args...) fprintf (stderr,args)
+#define pb push_back
+#define mp make_pair
 
-const int N = 2e5 + 10;
+typedef long long ll;
+typedef pair<int,int> pii;
+typedef pair<ll,ll> pll;
 
-typedef pair <int, int> pii;
+const int MAX = 212345;
+const int INF = 0x3f3f3f3f;
+const ll  MOD = 1000000007;
 
 int n, m;
+pii pro[MAX];
+int lo[MAX], hi[MAX];
 
-int L[N], R[N];
-int LIS[N], LDS[N];
+int main () {
+    for (int i = 0; i < MAX; i++)
+	lo[i] = hi[i] = 1;
 
-int ans[N];
+    scanf ("%d %d", &n, &m);
+    for (int i = 0; i < m; i++) {
+	int x, id;
+	scanf ("%d %d", &x, &id);
+	pro[i] = mp(x, id);
+    }
+    sort(pro, pro + m);
 
-vector <pii> E;
-
-void solve ()
-{
-  sort (E.begin(), E.end());
-  reverse (E.begin(), E.end());
-
-  for (auto i: E)
-  {
-    int y = i.second;
-
-    debug ("%d\n", y);
-
-    LIS[y] = max (LIS[y], LIS[y - 1] + 1);
-    LDS[y] = max (LDS[y], LDS[y + 1] + 1);
-  }
-
-  for (int i = 1; i <= n - 1; i++)
-  {
-    int y1 = i;
-    int y2 = i + 1;
-
-    L[y1] = max (L[y1], LIS[i]);
-    L[y2] = max (L[y2], LIS[i] + 1);
-
-    R[y1] = max (R[y1], LDS[i] + 1);
-    R[y2] = max (R[y2], LDS[i]);
-  }
-
-  for (int i = 1; i <= n; i++)
-  {
-    int l = i - L[i] + 1;
-    int r = i + R[i] - 1;
-
-    ans[l]++;
-    ans[r + 1]--;
-  }
-
-  int sum = 0;
-  for (int i = 0; i <= n; i++)
-  {
-    sum += ans[i];
-    ans[i] = sum;
-  }
+    for (int i = 0; i < m; i++) {
+	hi[pro[i].second + 1] = max(hi[pro[i].second + 1], hi[pro[i].second] + 1);
+	lo[pro[i].second] = max(lo[pro[i].second], lo[pro[i].second + 1] + 1);
+    }
+    
+    for (int i = 1; i <= n; i++)
+	printf("%d ", lo[i] + hi[i] - 1);
+    printf("\n");
 }
 
-int main ()
-{
-  cin.sync_with_stdio (false);
-  cin.tie (0);
-  cout.tie (0);
-
-  cin » n » m;
-
-  for (int i = 1; i <= m; i++)
-  {
-    int x, y;
-    cin » x » y;
-
-    E.push_back (pii (x, y));
-  }
-
-  solve ();
-
-  for (int i = 1; i <= n; i++)
-    cout « max (1, ans[i]) « " ";
-  cout « '\n';
-
-  return 0;
-}
