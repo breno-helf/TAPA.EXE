@@ -10,3 +10,6 @@ Procurar num map, se aparece uma das substrings na substring da outra, mas isso 
 E - Problema de implementação. 
 
 G - Temos que colocar os medalhões na profundidade de seu valor, então o medalhão de valor i irá cobrir 1/2^i da árvore. Então precisamos verificar se as somas dos medalhões é menor ou igual a 1. Guardamos um vetor de 0,1 que diz que na i-esima posição a quantidade da árvore de 1/2^i que foi utilizada e sempre que virá 2 em uma posição somamos 1 na posição i-1-ésima posição e zeramos a i-ésima posição, se a posição 0 tiver valor 1, a árvore está cheia.  Sabemos que mudar um medalhão de valor i > 2*10^5 não vai mudar o valor final, pois ele irá percorrer no máximo N operações, exceto se a soma for igual a 1 + eps. Podemos simular essas operações com uma estrutura de dados como BIT, dando uma complexidade de O(n*logn)
+
+
+K - Usando as propriedades dos números surreais, o problema virá o maior subset que contem mais elementos que a soma dá zero.
