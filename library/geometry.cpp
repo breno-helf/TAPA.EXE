@@ -18,11 +18,11 @@ struct point {
     double operator *(point q) {return x * q.x + y * q.y;}
     //a%b = |a||b|sin(ang) //modulo do cross
     double operator ^(point q) {return x * q.y - y * q.x;}
-    double polar() { return ((y > -eps) ? atan2(y,x) : 2*Pi + atan2(y,x)); }
+    double polar() { return ((y > - EPS) ? atan2(y,x) : 2 * PI + atan2(y, x)); }
     double mod() { return sqrt(x * x + y * y); }
     double mod2() { return (x * x + y * y); }
     point rotate(double t) {
-	return point(x*cos(t)-y*sin(t), x*sin(t)+y*cos(t));
+	return point(x * cos(t) - y * sin(t), x * sin(t) + y * cos(t));
     }
     int cmp(point q) const {
 	if (int t = ::cmp(x, q.x)) return t;
