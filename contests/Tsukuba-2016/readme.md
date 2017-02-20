@@ -7,7 +7,7 @@ C - Para cada ponto de saída calculamos a quantidade de produtos que vem de cim
 D - Podemos guardar a quantidade de cada tipo de letra num intervalo (i,j) para as duas strings, com soma acumulada, dando O(26*N^2).
 Procurar num map, se aparece uma das substrings na substring da outra, mas isso daria memory limit exceed, um jeito de contornar isso é fazer para cada tamanho de letra.
 
-E - Problema de implementação. 
+E - Problema puramente de implementação, fazendo um bruteforce nas letras que podem ser trocadas pelos operadores e fazendo parsing da função resolvemos o problema, para parsear podemos verificar primeiro o - e os (), depois o sinal * e finalmente os sinais + e -.
 
 F - Inicialmente parece um problema de geometria, mas estudando um pouco o problema percebemos que o problema pode ser reduzido ao um problema de Teoria dos Números. Suponha que temos apenas três pontos,(0,0),(xdd,ydd), (c,d), então a área dele vale abs(xdd*d-ydd*c)/2 = g/2, entao enquanto g/2 <= 25000, podemos usar o algoritmo de euclides extendido para resolver. Por outro quando g/2>25000, podemos escolher (0,0),(xdd-1,ydd),(xdd,ydd-1),(xdd/g,ydd/g), que tem área igual a (xdd/g+ydd/g)/2 <= 25000
 
