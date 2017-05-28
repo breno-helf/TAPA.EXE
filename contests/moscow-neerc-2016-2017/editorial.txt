@@ -2,4 +2,4 @@ Problema A
 Assumir que tem um máximo(pico) e achar seus adjacentes módulo n...
 
 Problema B
-O deadlock acontece quanto l-w < val && val < r, assim pegamos o pior valor para val, sabemos que r*x+w*y=gcd(r,w)*k, então pegamos o gcd(r,w)*k maior possivel que é k = (((l-w)/gcd(r,w))+1)
+O deadlock acontece quanto l-w < val && val < r, assim pegamos o pior valor para val, sabemos que r*x+w*y=gcd(r,w)*k, que val é multiplo de gcd(r,w), então pegamos o gcd(r,w)*k maior possivel que é k = (((l-w)/gcd(r,w))+1), prenche a memória a não pode mais por no próximo passo e mais um pouco..
