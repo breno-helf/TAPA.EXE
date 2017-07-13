@@ -93,19 +93,23 @@ int query(pnode idx, int i, int j, int ini, int fim){
 	return query(idx->L,i,mid,ini,fim) + query(idx->R,mid+1,j,ini,fim);
 }
 
+set<int> E;
+
 void compute(){
 	sort(P.begin(),P.end());
 	root[0] = build(1,y);
 	for(int i = 0; i < n; ++i){
 		int j = i;
 		while(j < n && P[i].first == P[j].first){
-			int p = P[j].first;
+		    //int p = P[j].first;
 			int r = P[j].second;
 			++no;
 			root[no] = update(root[no-1],1,y,rm[r]);
 			++j;
 		}
+		// printf ("Raiz %d eh %d\n", P[i].first, no);
 		raiz[P[i].first] = no;
+		E.insert(no);
 		i = j - 1;
 	}
 }
@@ -114,7 +118,6 @@ int get(int a, int b, int c, int d){
 
 	if(a > b) swap(a,b);
 	if(c > d) swap(c,d);
-
 	int l, r, L, R;
 
 	it = ps.lower_bound(a);
@@ -133,12 +136,18 @@ int get(int a, int b, int c, int d){
 
 	L = rm[L];
 	R = rm[R];
+	// printf ("== %d %d\n", l, r);
 	l = raiz[l];
 	r = raiz[r];
-
-	assert(L && l && r && R);
-
-	return query(root[r],1,y,L,R) - query(root[l-1],1,y,L,R);
+	
+	//assert(L && l && r && R);
+	int T = l;
+	auto I = E.lower_bound(T);
+	if (I == E.begin()) T = 0;
+	else T = *(prev(I));
+	// printf ("--> %d %d %d %d\n", L, R, r, l);
+	// printf ("--> %d\n", query(root[l], 1, y, L, R));
+	return query(root[r],1,y,L,R) - query(root[T],1,y,L,R);
 }
 
 int main(){
