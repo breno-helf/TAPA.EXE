@@ -12,9 +12,7 @@ Collections of some commonly used algorithms.
 - manacher
 - 字符串hash
 - EERTREE
-- 后缀数组
-- Prefix Doubling
-- SA-IS
+- 后缀数组(Prefix Doubling, SA-IS)
 - 后缀树
 - 后缀自动机
 - 子序列自动机
