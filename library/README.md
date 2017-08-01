@@ -12,7 +12,7 @@ com algum, falem no grupo e se alguem fizer algum risquem.
   	  O Jiang as vezes tira cosias carteadas desse caderno, acho legal
 	  imprimir, apesar de que ele está 100% em chinês (Fazer oq :P)
 
-- Dinamyc convex Hull --> Feito pelo Kondo, upado
+- Dynamic convex Hull --> Feito pelo Kondo, upado
 - Otimizações de DP diversas
   	  Talvez tenha no caderno do Jiang, mas não temos samples
 
