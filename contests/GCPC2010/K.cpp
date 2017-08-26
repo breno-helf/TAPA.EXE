@@ -5,7 +5,7 @@ using namespace std;
 #define debug(args...) fprintf(stderr, args)
 
 const int MAX = 40;
-typedef long double ld;
+typedef double ld;
 const ld eps = 1e-9;
 
 inline int cmp(ld x, ld y = 0, ld tol = eps) {
@@ -21,14 +21,8 @@ struct point {
     point operator /(double t) { return point(x/t, y/t); }
 
     double operator *(point q) { return (x * q.x + y * q.y); }
-    double operator %(point q) { return (x * q.y - y * q.x); }
     double mod() { return sqrt(x * x + y * y); }
-
-
-    int cmp(point q) const {
-	if (int t = ::cmp(x, q.x)) return t;
-	return ::cmp(y, q.y);
-    }
+	
 };
 
 //projeta o vetor v sobre o vetor u;
@@ -36,22 +30,9 @@ point proj(point v, point u) {
     return u * ((u * v) / (u*u));
 }
 
-// Calcula a distancia do ponto r ao segmento pq.
-double seg_distance(point p, point q, point r) {
-    point A = r - q, B = r - p, C = q - p;
-    double a = A * A, b = B * B, c = C * C;
-    if (cmp(b, a + c) >= 0) return sqrt(a);
-    else if (cmp(a, b + c) >= 0) return sqrt(b);
-    else return fabs(A % B) / sqrt(c);
-}
-
-// Calcula a distancia do ponto r ao segmento pq.
-double seg_distance2(point p, point q, point r) {
-    point A = r - q, B = r - p, C = q - p;
-    double a = A * A, b = B * B, c = C * C;
-    if (cmp(b, a + c) >= 0) return 0;
-    else if (cmp(a, b + c) >= 0) return (p - q).mod();
-    else return (proj(r - p, q - p) - p).mod();
+bool test(point v, point u) {
+    double L = (u * v) / (u * u);
+    return (L >= 0.0 && L <= 1.0);
 }
 
 vector<int> adj[MAX];
@@ -61,12 +42,13 @@ point g;
 
 void tenta(int a, int b) {
     if (a == b) return;
-    double d = (red[a] - red[b]).mod();
+    //double d = (red[a] - red[b]).mod();
     //debug("--> %d %d\n", a, b);
     for (int i = 0; i < n; i++) {
-	point e = proj(blue[i] - red[a], red[b] - red[a]);
-	double d2 = seg_distance2(red[a], red[b], blue[i]);
-	double d3 = seg_distance(red[a], red[b], blue[i]);
+	if (!test(blue[i] - red[a], red[b] - red[a])) continue;
+	point e = proj(blue[i] - red[a], red[b] - red[a]) + red[a];
+	double d2 = (e - red[a]).mod();
+	double d3 = (e - blue[i]).mod();
 	//debug("%.3lf %.3lf\n", d2, d3 * 3);
 	if (3 * d3 <= d2) return;
     }
@@ -106,22 +88,22 @@ int main() {
 	scanf("%d", &n);
 	for (int i = 0; i < n; i++) {
 	    ld x, y;
-	    scanf("%LF%LF", &x, &y);
+	    scanf("%lf%lf", &x, &y);
 	    red.pb(point(x, y));
 	}
 	for (int i = 0; i < n; i++) {
 	    ld x, y;
-	    scanf("%LF%LF", &x, &y);
+	    scanf("%lf%lf", &x, &y);
 	    blue.pb(point(x, y));
 	}
 
 	ld x, y;
-	scanf("%LF%LF", &x, &y);
+	scanf("%lf%lf", &x, &y);
 	g = point(x, y);
 	red.pb(g);
 	
 	build();
-	// tenta(0, n);
+
 	// for (int i = 0; i < n; i++) {
 	//     printf("--> %d\n", i);
 	//     for (auto v : adj[i]) printf("%d ", v);
